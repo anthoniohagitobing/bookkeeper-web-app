@@ -1,7 +1,7 @@
 'use client';
 
 // IMPORT MODULES
-import { ContextVariables } from '../context-variables';
+import { ContextVariables } from '../../context-variables';
 import { useState } from 'react';
 import { lusitana } from '@/fonts';
 //import ResponsiveAppBar from './responsive-app-bar';

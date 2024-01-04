@@ -6,10 +6,17 @@ export const metadata = {
   title: 'Bookkeeper',
 }
 
+interface RootLayout {
+  children: React.ReactNode,
+  params: {
+    locale: string
+  }
+}
+
 // ROOT LAYOUT
-export default function RootLayout({ children }: { children: React.ReactNode}) {
+export default function RootLayout({ children, params: {locale} }: RootLayout) {
   return (
-    <html lang="en">
+    <html lang={locale}>
       <LayoutSub childrenProp={children}/>
     </html>
   )
