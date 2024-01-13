@@ -1,8 +1,10 @@
 // IMPORT MODULES
+import { Metadata } from 'next';
 import LayoutSub from './layout-sub';
+// import 'react-toastify/dist/ReactToastify.css';
 
 // DEFAULT NAMING
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Bookkeeper',
 }
 
