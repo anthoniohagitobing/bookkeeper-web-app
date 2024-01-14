@@ -4,7 +4,7 @@
 import { ContextVariables } from '../../context-variables';
 import { useState } from 'react';
 import { lusitana } from '@/fonts';
-//import ResponsiveAppBar from './responsive-app-bar';
+import { ToastContainer } from 'react-toastify';
 // import Navbar from './navbar';
 
 // DATA TYPE
@@ -24,6 +24,7 @@ export default function LayoutSub(props: Props): JSX.Element {
     return (
         <ContextVariables.Provider value={{userId, userUid, userFirstName, userLastName, userEmail, userPhotoUrl, setUserId, setUserUid, setUserFirstName, setUserLastName, setUserEmail, setUserPhotoUrl}}>
             <body className={`${lusitana.className}`}>
+                <ToastContainer />
                 {/* <div><Navbar /></div> */}
                 <div>{props.childrenProp}</div>
             </body>
