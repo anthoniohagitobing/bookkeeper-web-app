@@ -34,7 +34,7 @@ export default function VerifyEmailComponent(): JSX.Element {
         // Check response
         if (res.status === 200) {
             // If success, redirect to verify email component
-            router.push("auth/login");
+            router.push("/user/login/");
             toast.success(res.data.message);
         }
     }

@@ -54,7 +54,7 @@ export default function SignUpComponent(): JSX.Element {
         // Check response
         if (res.status === 201) {
             // If success, redirect to verify email component
-            router.push("/auth/verify-email");
+            router.push("/user/verify-email/");
             toast.success(res.data.message);
         }
         // Server error 

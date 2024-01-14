@@ -35,14 +35,13 @@ export default function ProfileComponent(): JSX.Element {
             localStorage.removeItem("user");
 
             // Display success messsage and push to log-in
-            router.push("auth/log-in");
+            router.push("/user/log-in/");
             toast.success("Log-out successful");
         }
     }
 
     async function getSomeData() {
         const url: string = `user/check/`;
-        console.log(accessToken);
         const res: AxiosResponse<any, any> = await axiosInstance.get(url);
 
         if (res.status === 200) {
@@ -51,20 +50,23 @@ export default function ProfileComponent(): JSX.Element {
     }
 
     // INITIAL USE EFFECT
-    // From local storage, retrieve user and access token
+    // From local storage, retrieve user and access token> Note that you need to parse it as it is in json
+    // Because it is retrieving from local storage, we need to use useEffect
     useEffect(() => {
-            const jsonUser: string | null = localStorage.getItem("user");
-            setUser(jsonUser ? JSON.parse(jsonUser) : null);
-            setAccessToken(localStorage.getItem("access_token"));
-            setRefreshToken(localStorage.getItem("refresh_token"));
-            setCheck(true);
+        const jsonUser: string | null = localStorage.getItem("user");
+        setUser(jsonUser ? JSON.parse(jsonUser) : null);
+        const jsonAccessToken = localStorage.getItem("access_token");
+        setAccessToken(jsonAccessToken ? JSON.parse(jsonAccessToken) : null);
+        const jsonRefreshToken = localStorage.getItem("refresh_token");
+        setRefreshToken(jsonRefreshToken ? JSON.parse(jsonRefreshToken) : null);
+        setCheck(true);
     }, []);
 
     // If no access token, push to log in
     useEffect(() => {
         if (check) {
             if (accessToken === null && !user) {
-                router.push("/auth/log-in");
+                router.push("/user/log-in/");
             } else {
                 getSomeData()
             }

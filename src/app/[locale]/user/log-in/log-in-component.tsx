@@ -3,9 +3,8 @@
 // MODULES IMPORT
 import React, { useState } from "react";
 import axios, { AxiosResponse } from "axios";
-import { useRouter } from "../../../../navigation";
+import { useRouter, Link } from "../../../../navigation";
 import { toast } from 'react-toastify';
-import { json } from "stream/consumers";
 
 // PAGE COMPONENT
 export default function LogInComponent(): JSX.Element {
@@ -55,7 +54,7 @@ export default function LogInComponent(): JSX.Element {
             localStorage.setItem("refresh_token", JSON.stringify(res.data.refresh_token));
             // redirect to verify email component
             toast.success("Login successful");
-            router.push("/profile");
+            router.push("/profile/");
         }
         // Server error 
     }
@@ -68,30 +67,29 @@ export default function LogInComponent(): JSX.Element {
                     <p>Loading...</p>
                 )}
                 <div>
-                    <div>
-                        <label htmlFor="email">Email:</label>
-                        <input 
-                            name="email"
-                            id="email"
-                            type="email"
-                            value={loginData.email}
-                            onChange={handleOnChange}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="password">Password</label>
-                        <input 
-                            name="password"
-                            id="password"
-                            type="password"
-                            value={loginData.password}
-                            onChange={handleOnChange}
-                            required
-                        />
-                    </div>
-                    <button type="submit">Submit</button>
+                    <label htmlFor="email">Email:</label>
+                    <input 
+                        name="email"
+                        id="email"
+                        type="email"
+                        value={loginData.email}
+                        onChange={handleOnChange}
+                        required
+                    />
                 </div>
+                <div>
+                    <label htmlFor="password">Password</label>
+                    <input 
+                        name="password"
+                        id="password"
+                        type="password"
+                        value={loginData.password}
+                        onChange={handleOnChange}
+                        required
+                    />
+                </div>
+                <button type="submit">Submit</button>
+                <Link href="/user/forgot-password">Forgot Password</Link>
             </form>
         </div>
     )

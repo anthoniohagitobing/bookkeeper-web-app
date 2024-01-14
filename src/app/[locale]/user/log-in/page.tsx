@@ -1,5 +1,3 @@
-'use client'
-
 // MODULES IMPORT
 import LogInComponent from './log-in-component';
 

@@ -1,5 +1,3 @@
-'use client'
-
 // MODULES IMPORT
 import SignUpComponent from './sign-up-component';
 
