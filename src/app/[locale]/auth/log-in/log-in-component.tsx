@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import { useRouter } from "../../../../navigation";
 import { toast } from 'react-toastify';
+import { json } from "stream/consumers";
 
 // PAGE COMPONENT
 export default function LogInComponent(): JSX.Element {
@@ -40,13 +41,21 @@ export default function LogInComponent(): JSX.Element {
         setIsLoading(true);
         const res: AxiosResponse<any, any> = await axios.post(url, loginData);
         setIsLoading(false);
-        console.log(res);
+
+        const user = {
+            "email": res.data.email,
+            "full_name": res.data.full_name
+        }
 
         // Check response
         if (res.status === 200) {
-            // If success, redirect to verify email component
-            router.push("/auth/verify-email");
+            // If success, set additional token and user data
+            localStorage.setItem("user", JSON.stringify(user));
+            localStorage.setItem("access_token", JSON.stringify(res.data.access_token));
+            localStorage.setItem("refresh_token", JSON.stringify(res.data.refresh_token));
+            // redirect to verify email component
             toast.success("Login successful");
+            router.push("/profile");
         }
         // Server error 
     }
@@ -55,6 +64,9 @@ export default function LogInComponent(): JSX.Element {
         <div>
             <h2>Log In</h2>
             <form onSubmit={handleSubmit}>
+                {isLoading && (
+                    <p>Loading...</p>
+                )}
                 <div>
                     <div>
                         <label htmlFor="email">Email:</label>

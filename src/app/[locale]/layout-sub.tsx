@@ -5,7 +5,6 @@ import { ContextVariables } from '../../context-variables';
 import { useState } from 'react';
 import { lusitana } from '@/fonts';
 import { ToastContainer } from 'react-toastify';
-// import ToastContainer from "../../toastconfig";
 // import Navbar from './navbar';
 
 // DATA TYPE

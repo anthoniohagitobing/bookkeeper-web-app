@@ -1,7 +1,7 @@
 // IMPORT MODULES
 import { Metadata } from 'next';
 import LayoutSub from './layout-sub';
-// import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 // DEFAULT NAMING
 export const metadata: Metadata = {
