@@ -6,6 +6,7 @@ import { useRouter } from "../../../navigation";
 import axiosInstance from "@/axios-instance";
 import { toast } from 'react-toastify';
 import axios, { AxiosResponse } from "axios";
+import secureLocalStorage from "react-secure-storage";
 
 interface User {
     email: string,
@@ -30,9 +31,13 @@ export default function ProfileComponent(): JSX.Element {
         const res: AxiosResponse<any, any> = await axiosInstance.post(url, {"refresh_token": refreshToken})
         if (res.status = 200) {
             // Remove data from local storage
-            localStorage.removeItem("access_token");
-            localStorage.removeItem("refresh_token");
-            localStorage.removeItem("user");
+            // localStorage.removeItem("access_token");
+            // localStorage.removeItem("refresh_token");
+            // localStorage.removeItem("user");
+
+            secureLocalStorage.removeItem("access_token");
+            secureLocalStorage.removeItem("refresh_token");
+            secureLocalStorage.removeItem("user");
 
             // Display success messsage and push to log-in
             router.push("/user/log-in/");
@@ -53,18 +58,28 @@ export default function ProfileComponent(): JSX.Element {
     // From local storage, retrieve user and access token> Note that you need to parse it as it is in json
     // Because it is retrieving from local storage, we need to use useEffect
     useEffect(() => {
-        const jsonUser: string | null = localStorage.getItem("user");
+        // const jsonUser: string | null = localStorage.getItem("user");
+        const jsonUser: string = secureLocalStorage.getItem("user") as string;
+        console.log
         setUser(jsonUser ? JSON.parse(jsonUser) : null);
-        const jsonAccessToken = localStorage.getItem("access_token");
+        
+        // const jsonAccessToken: string | null = localStorage.getItem("access_token");
+        const jsonAccessToken: string = secureLocalStorage.getItem("access_token") as string;
         setAccessToken(jsonAccessToken ? JSON.parse(jsonAccessToken) : null);
-        const jsonRefreshToken = localStorage.getItem("refresh_token");
+        
+        // const jsonRefreshToken: string | null = localStorage.getItem("refresh_token");
+        const jsonRefreshToken: string = secureLocalStorage.getItem("refresh_token") as string;
         setRefreshToken(jsonRefreshToken ? JSON.parse(jsonRefreshToken) : null);
+
         setCheck(true);
     }, []);
 
     // If no access token, push to log in
     useEffect(() => {
         if (check) {
+            // console.log(user);
+            // console.log(accessToken);
+            // console.log(refreshToken);
             if (accessToken === null && !user) {
                 router.push("/user/log-in/");
             } else {

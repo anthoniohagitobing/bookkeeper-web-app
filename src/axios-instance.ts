@@ -4,6 +4,7 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { jwtDecode } from "jwt-decode";
 import dayjs from "dayjs";
+import secureLocalStorage from "react-secure-storage";
 
 // INTERFACE
 interface Token {
@@ -31,13 +32,14 @@ axiosInstance.interceptors.request.use(async (req) => {
     let accessToken: string | null = null;
     let refreshToken: string | null = null
     if (typeof window !== 'undefined') {
-        const jsonAccessToken = localStorage.getItem("access_token");
+        // const jsonAccessToken: string | null = localStorage.getItem("access_token");
+        const jsonAccessToken: string = secureLocalStorage.getItem('access_token') as string;
         accessToken = jsonAccessToken ? JSON.parse(jsonAccessToken) : null;
-        const jsonRefreshToken = localStorage.getItem("refresh_token");
+
+        // const jsonRefreshToken: string | null = localStorage.getItem("refresh_token");
+        const jsonRefreshToken: string = secureLocalStorage.getItem('refresh_token') as string;
         refreshToken = jsonRefreshToken ? JSON.parse(jsonRefreshToken) : null;
-        // console.log(accessToken)
     } 
-    // console.log(accessToken)
 
     // If access and refresh token are available, then check token
     // If not available, then the following will not be processed. The axios request will be automatically rejected as it is unauthorized
@@ -64,9 +66,10 @@ axiosInstance.interceptors.request.use(async (req) => {
         // If response is successful, then the refresh token has not expired and we got a renew access token
         if (res.status === 200) {
             // Apply new access token to local storage and axios request, then return req
-            console.log('new access token: ', res.data.access)
-            localStorage.setItem('access_token', JSON.stringify(res.data.access))
-            req.headers.Authorization = `Bearer ${res.data.access}`
+            console.log('new access token: ', res.data.access);
+            // localStorage.setItem('access_token', JSON.stringify(res.data.access));
+            secureLocalStorage.setItem("access_token", JSON.stringify(res.data.access));
+            req.headers.Authorization = `Bearer ${res.data.access}`;
         }
     } 
 

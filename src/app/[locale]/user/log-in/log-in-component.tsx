@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import { useRouter, Link } from "../../../../navigation";
 import { toast } from 'react-toastify';
+import secureLocalStorage from "react-secure-storage";
 
 // PAGE COMPONENT
 export default function LogInComponent(): JSX.Element {
@@ -49,10 +50,14 @@ export default function LogInComponent(): JSX.Element {
         // Check response
         if (res.status === 200) {
             // If success, set additional token and user data
-            localStorage.setItem("user", JSON.stringify(user));
-            localStorage.setItem("access_token", JSON.stringify(res.data.access_token));
-            localStorage.setItem("refresh_token", JSON.stringify(res.data.refresh_token));
-            // redirect to verify email component
+            // localStorage.setItem("user", JSON.stringify(user));
+            // localStorage.setItem("access_token", JSON.stringify(res.data.access_token));
+            // localStorage.setItem("refresh_token", JSON.stringify(res.data.refresh_token));
+            secureLocalStorage.setItem('user', JSON.stringify(user));
+            secureLocalStorage.setItem("access_token", JSON.stringify(res.data.access_token));
+            secureLocalStorage.setItem("refresh_token", JSON.stringify(res.data.refresh_token));
+
+            // Redirect to verify email component
             toast.success("Login successful");
             router.push("/profile/");
         }
