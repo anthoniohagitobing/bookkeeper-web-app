@@ -1,9 +1,9 @@
 'use client';
 
 // IMPORT MODULES
-import { ContextVariables } from '../../context-variables';
+import { ContextVariables } from '../../lib/context-variables';
 import { useState } from 'react';
-import { lusitana } from '@/fonts';
+import { lusitana } from '@/lib/fonts';
 import { ToastContainer } from 'react-toastify';
 // import Navbar from './navbar';
 

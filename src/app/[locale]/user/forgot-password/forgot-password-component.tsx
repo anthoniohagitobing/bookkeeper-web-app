@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { AxiosResponse } from "axios";
 import { useRouter } from "../../../../navigation";
 import { toast } from 'react-toastify';
-import axiosInstance from "@/axios-instance";
+import axiosInstance from "@/lib/axios-instance";
 
 // PAGE COMPONENT
 export default function ForgotPasswordComponent(): JSX.Element {

@@ -58,19 +58,26 @@ axiosInstance.interceptors.request.use(async (req) => {
         if(!isExpired) return req
 
         // If expired, we want to renew the get a new access token
-        const url: string = `${baseURL}user/token/refresh/`
-        const res = await axios.post(url, {
-            refresh: refreshToken
-        });
-
-        // If response is successful, then the refresh token has not expired and we got a renew access token
-        if (res.status === 200) {
-            // Apply new access token to local storage and axios request, then return req
-            console.log('new access token: ', res.data.access);
-            // localStorage.setItem('access_token', JSON.stringify(res.data.access));
-            secureLocalStorage.setItem("access_token", JSON.stringify(res.data.access));
-            req.headers.Authorization = `Bearer ${res.data.access}`;
+        try {
+            const url: string = `${baseURL}user/token/refresh/`
+            const res = await axios.post(url, {
+                refresh: refreshToken
+            });
+    
+            // If response is successful, then the refresh token has not expired and we got a renew access token
+            if (res.status === 200) {
+                // Apply new access token to local storage and axios request, then return req
+                console.log('new access token: ', res.data.access);
+                // localStorage.setItem('access_token', JSON.stringify(res.data.access));
+                secureLocalStorage.setItem("access_token", JSON.stringify(res.data.access));
+                req.headers.Authorization = `Bearer ${res.data.access}`;
+            }
+        } catch (err) {
+            // If renewal fail, then remove token available in local storage (if available)
+            secureLocalStorage.removeItem("access_token");
+            secureLocalStorage.removeItem("refresh_token");
         }
+
     } 
 
     // Return axios request
