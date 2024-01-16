@@ -23,7 +23,7 @@ export default function ResetPasswordComponent(): JSX.Element {
       confirmPassword: "",
     });
 
-    // OTHER SETUP
+    // NAVIGATION SETUP
     const router = useRouter();
 
     // HELPER FUNCTION

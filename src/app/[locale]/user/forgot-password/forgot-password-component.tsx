@@ -12,7 +12,7 @@ export default function ForgotPasswordComponent(): JSX.Element {
     // STATE VARIABLES
     const [email, setEmail] = useState("");
 
-    // OTHER SETUP
+    // NAVIGATION SETUP
     const router = useRouter();
 
     // HELPER FUNCTION

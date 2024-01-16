@@ -27,7 +27,7 @@ export default function SignUpComponent(): JSX.Element {
     });
     const [error, setError] = useState<string>("");  
 
-    // OTHER SETUP
+    // NAVIGATION SETUP
     const router = useRouter();
 
     // HELPER FUNCTION
