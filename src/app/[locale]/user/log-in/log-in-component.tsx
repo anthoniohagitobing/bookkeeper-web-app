@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import { useRouter, Link } from "../../../../navigation";
 import { toast } from 'react-toastify';
+import secureLocalStorage from "react-secure-storage";
 
 // PAGE COMPONENT
 export default function LogInComponent(): JSX.Element {
@@ -16,7 +17,7 @@ export default function LogInComponent(): JSX.Element {
     const [error, setError] = useState<string>("");  
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    // OTHER SETUP
+    // NAVIGATION SETUP
     const router = useRouter();
 
     // HELPER FUNCTION
@@ -41,18 +42,20 @@ export default function LogInComponent(): JSX.Element {
         const res: AxiosResponse<any, any> = await axios.post(url, loginData);
         setIsLoading(false);
 
-        const user = {
-            "email": res.data.email,
-            "full_name": res.data.full_name
-        }
+        // Create user variable, this is temporarily disabled
+        // const user = {
+        //     "email": res.data.email,
+        //     "full_name": res.data.full_name
+        // }
 
         // Check response
         if (res.status === 200) {
             // If success, set additional token and user data
-            localStorage.setItem("user", JSON.stringify(user));
-            localStorage.setItem("access_token", JSON.stringify(res.data.access_token));
-            localStorage.setItem("refresh_token", JSON.stringify(res.data.refresh_token));
-            // redirect to verify email component
+            // secureLocalStorage.setItem('user', JSON.stringify(user));
+            secureLocalStorage.setItem("access_token", JSON.stringify(res.data.access_token));
+            secureLocalStorage.setItem("refresh_token", JSON.stringify(res.data.refresh_token));
+
+            // Redirect to verify email component
             toast.success("Login successful");
             router.push("/profile/");
         }

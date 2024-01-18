@@ -11,7 +11,7 @@ export default function VerifyEmailComponent(): JSX.Element {
     // STATE VARIABLES
     const [otp, setOtp] = useState<string>("");
 
-    // OTHER SETUP
+    // NAVIGATION SETUP
     const router = useRouter();
 
     // Handle on Submit function for form

@@ -27,7 +27,7 @@ export default function SignUpComponent(): JSX.Element {
     });
     const [error, setError] = useState<string>("");  
 
-    // OTHER SETUP
+    // NAVIGATION SETUP
     const router = useRouter();
 
     // HELPER FUNCTION
@@ -53,8 +53,14 @@ export default function SignUpComponent(): JSX.Element {
 
         // Check response
         if (res.status === 201) {
-            // If success, redirect to verify email component
-            router.push("/user/verify-email/");
+            // If success, 
+            
+            // For email authentication route, redirect to verify email component
+            // router.push("/user/verify-email/");
+
+            // For no email authentication route
+            router.push("/user/log-in");
+
             toast.success(res.data.message);
         }
         // Server error 
