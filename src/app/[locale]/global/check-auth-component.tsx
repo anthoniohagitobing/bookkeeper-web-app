@@ -61,9 +61,12 @@ export default function CheckAuthComponent(): JSX.Element {
             // If user is not authenticated 
             } else if (!Authenticated) {
                 // If user is not in log-in, display toast message and re-route to log-in.
-                if (pathname !== "/user/log-in") {
+                if (pathname === "/user/log-in" || pathname === "/user/sign-up") {
+                    return
+                } else {
                     toast.error("Session timeout, please log-in");
                     router.push("/user/log-in");
+
                 }
             }
         }
