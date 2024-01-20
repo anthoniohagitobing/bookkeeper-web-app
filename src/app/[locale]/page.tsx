@@ -3,7 +3,7 @@ import {useTranslations} from 'next-intl';
 
 // PAGE COMPONENT
 export default function Home(): JSX.Element {
-    const t = useTranslations('Index');
+    const t = useTranslations('Home');
     
     return (
         <div>
