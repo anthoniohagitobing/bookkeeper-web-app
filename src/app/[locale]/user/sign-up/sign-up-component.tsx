@@ -3,7 +3,7 @@
 // MODULES IMPORT
 import React, { useState } from "react";
 import axios, { AxiosResponse } from "axios";
-import { useRouter } from "../../../../navigation";
+import { useRouter, Link } from "../../../../navigation";
 import { toast } from 'react-toastify';
 
 // INTERFACE
@@ -131,6 +131,7 @@ export default function SignUpComponent(): JSX.Element {
                     <button type="submit">Submit</button>
                 </div>
             </form>
+            <p>Already have an account? <Link href="/user/log-in/">Log-in</Link></p>
         </div>
     )
 }

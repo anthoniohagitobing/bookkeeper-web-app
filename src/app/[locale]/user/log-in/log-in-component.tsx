@@ -93,6 +93,7 @@ export default function LogInComponent(): JSX.Element {
                 </div>
                 <button type="submit">Submit</button>
                 <Link href="/user/forgot-password">Forgot Password</Link>
+                <p>Don't have an account? <Link href="/user/sign-up">Sign up</Link></p>
             </form>
         </div>
     )

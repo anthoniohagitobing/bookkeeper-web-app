@@ -1,7 +1,11 @@
 // IMPORT MODULES
 import { Metadata } from 'next';
+import { lusitana } from '@/lib/fonts';
 import LayoutSub from './layout-sub';
+
+// CSS
 import 'react-toastify/dist/ReactToastify.css';
+import "../../lib/globals.css"
 
 // DEFAULT NAMING
 export const metadata: Metadata = {
@@ -19,7 +23,9 @@ interface RootLayout {
 export default function RootLayout({ children, params: {locale} }: RootLayout) {
   return (
     <html lang={locale}>
-      <LayoutSub childrenProp={children}/>
+      <body className={`${lusitana.className}`}>
+        <LayoutSub childrenProp={children}/>
+      </body>
     </html>
   )
 }

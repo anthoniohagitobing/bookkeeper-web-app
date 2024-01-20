@@ -1,5 +1,6 @@
 // MODULES IMPORT
 import {useTranslations} from 'next-intl';
+import { Link } from "../../navigation"
 
 // PAGE COMPONENT
 export default function Home(): JSX.Element {
@@ -8,8 +9,7 @@ export default function Home(): JSX.Element {
     return (
         <div>
             <h1>{t('title')}</h1>
-            <p>Bookkeeper</p>
-            <p>Bookkeeper</p>
+            <Link href="/user/log-in/"><button>Get Started</button></Link>
         </div>
     )
 }
