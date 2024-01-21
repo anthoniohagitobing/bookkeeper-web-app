@@ -2,6 +2,7 @@
 import { Metadata } from 'next';
 import { lusitana } from '@/lib/fonts';
 import LayoutSub from './layout-sub';
+import NavBar from './navbar';
 
 // CSS
 import 'react-toastify/dist/ReactToastify.css';

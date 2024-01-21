@@ -1,7 +1,7 @@
 'use client';
 
 // IMPORT MODULES
-import { Link } from "../../navigation";
+import { Link, usePathname } from "../../navigation";
 import { ContextVariables } from '../../lib/context-variables';
 import react, { useState, useEffect, useContext } from 'react';
 
@@ -26,16 +26,23 @@ const userNavigation = [
   { name: 'Sign out', href: '#' },
 ]
 
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-  }
+// function classNames(...classes) {
+//     return classes.filter(Boolean).join(' ')
+//   }
 
 // PAGE COMPONENT
 export default function NavBar() {
     const { userAuthenticated, setUserAuthenticated } = useContext(ContextVariables);
     // console.log(userAuthenticated);
+
     return (
         <div>
+            { userAuthenticated ? (
+                <div></div>
+            ) : (
+                <div></div>
+            )
+        }
             <div>
                 <p>Left</p>
                 <Link href="/">
