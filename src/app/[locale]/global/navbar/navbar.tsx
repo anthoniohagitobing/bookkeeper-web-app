@@ -5,37 +5,36 @@ import { Link, usePathname } from "../../../../navigation";
 import { ContextVariables } from '../../../../lib/context-variables';
 import react, { useState, useEffect, useContext, Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, ChevronRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { UserCircleIcon } from "@heroicons/react/24/solid";
 
-const user = {
-  name: 'Tom Cook',
-  email: 'tom@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
+
 
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
-  { name: 'Reports', href: '#', current: false },
+  { name: 'Dashboard', href: '/dashboard', current: true },
+  { name: 'Profile', href: '/profile', current: false },
 ]
 
 const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
+  { name: 'Profile', href: '/profile' },
+//   { name: 'Settings', href: '#' },
+  { name: 'Sign Out', href: '#' },
 ]
 
-function classNames(...classes) {
+function classNames(...classes: String[]) {
     return classes.filter(Boolean).join(' ')
   }
 
 // PAGE COMPONENT
 export default function NavBar() {
-    const { userAuthenticated, setUserAuthenticated } = useContext(ContextVariables);
+    const { userAuthenticated } = useContext(ContextVariables);
+    const { userEmail } = useContext(ContextVariables);
     // console.log(userAuthenticated);
+
+    const user = {
+        email: userEmail,
+        // imageUrl: "",
+      }
 
     return (
         <div>
@@ -60,22 +59,25 @@ export default function NavBar() {
                     <button>Log-in</button>
                 </Link>
             </div> */}
-            <Disclosure as="nav" className="bg-gray-800">
+            <Disclosure as="nav" className="bg-white border-b-2 border-gray-300">
                 {({ open }) => (
                     <>
                     {/* Navbar block */}
-                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <div className="mx-auto px-2 sm:px-4 lg:px-6">
                         <div className="flex h-16 items-center justify-between">
                             {/* Per item, on left */}
                             <div className="flex items-center">
                                 {/* Logo */}
-                                <div className="flex-shrink-0">
-                                    <img
-                                        className="h-10 w-10 rounded-xl"
-                                        src="/logo.jpeg"
-                                        alt="Bookkeeper logo"
-                                    />
-                                </div>
+                                <Link href="/" className="flex items-center">
+                                    <div className="flex flex-shrink-0">
+                                        <img
+                                            className="h-10 w-10 rounded-xl"
+                                            src="/logo.jpeg"
+                                            alt="Bookkeeper logo"
+                                        />
+                                    </div>
+                                    <p className="text-black font-bold text-lg ml-2">Bookkeeper</p>
+                                </Link>
                                 {/* Other items, only shown on desktop */}
                                 <div className="hidden md:block">
                                     <div className="ml-10 flex items-baseline space-x-4">
@@ -106,7 +108,8 @@ export default function NavBar() {
                                         <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                                             <span className="absolute -inset-1.5" />
                                             <span className="sr-only">Open user menu</span>
-                                            <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />
+                                            <UserCircleIcon className="block h-8 w-8 text-white" aria-hidden="true"/>
+                                            {/* <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" /> */}
                                         </Menu.Button>
                                         {/* Transition effect */}
                                         <Transition
@@ -181,10 +184,10 @@ export default function NavBar() {
                             {/* User info */}
                             <div className="flex items-center px-5">
                                 <div className="flex-shrink-0">
-                                    <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
+                                    {/* <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" /> */}
+                                    <UserCircleIcon className="block h-8 w-8 text-white" aria-hidden="true"/>
                                 </div>
                                 <div className="ml-3">
-                                    <div className="text-base font-medium leading-none text-white">{user.name}</div>
                                     <div className="text-sm font-medium leading-none text-gray-400">{user.email}</div>
                                 </div>
                             </div>

@@ -14,17 +14,17 @@ interface Props {
 // PAGE COMPONENT
 export default function LayoutSub(props: Props): JSX.Element {
     const [userAuthenticated, setUserAuthenticated] = useState<boolean>(false);
+    const [userEmail, setUserEmail] = useState<string>('noEmail');
     
     // const [userId, setUserId] = useState<number>(0);
     // const [userUid, setUserUid] = useState<string>('noUid');
     // const [userFirstName, setUserFirstName] = useState<string>('noFirstName');
     // const [userLastName, setUserLastName] = useState<string>('noLastName');
-    // const [userEmail, setUserEmail] = useState<string>('noEmail');
     // const [userPhotoUrl, setUserPhotoUrl] = useState<string>('noPhotoUrl');
 
     return (
         <>
-            <ContextVariables.Provider value={{userAuthenticated, setUserAuthenticated }}>
+            <ContextVariables.Provider value={{userAuthenticated, userEmail, setUserAuthenticated, setUserEmail }}>
                 <ToastContainer />
                 <Navbar />
                 {props.childrenProp}
