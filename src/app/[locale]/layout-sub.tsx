@@ -4,7 +4,7 @@
 import { ContextVariables } from '../../lib/context-variables';
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
-import Navbar from './navbar';
+import Navbar from './global/navbar/navbar';
 
 // DATA TYPE
 interface Props {
