@@ -8,9 +8,8 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 
-
-
-
+// SUB-COMPONENTS
+import ThemeSwitcher from "./theme-switcher";
 
 // PAGE COMPONENT
 export default function NavBar() {
@@ -66,7 +65,7 @@ export default function NavBar() {
                     <button>Log-in</button>
                 </Link>
             </div> */}
-            <Disclosure as="nav" className="bg-white border-b-2 border-customGray-light">
+            <Disclosure as="nav" className="bg-white dark:bg-black border-b-2 border-customGray-light">
                 {({ open }) => (
                     <>
                     {/* Navbar block */}
@@ -102,49 +101,55 @@ export default function NavBar() {
                                 </div>
                             </div>
 
-                            {/* Profile dropdown, desktop */}
-                            <div className="hidden md:block">
-                                <div className="ml-4 flex items-center md:ml-6">
-                                    <Menu as="div" className="relative ml-3">
-                                        {/* Button to open */}
-                                        <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                                            <span className="absolute -inset-1.5" />
-                                            <span className="sr-only">Open user menu</span>
-                                            <UserCircleIcon className="block h-8 w-8 text-white" aria-hidden="true"/>
-                                            {/* <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" /> */}
-                                        </Menu.Button>
-                                        {/* Transition effect */}
-                                        <Transition
-                                            as={Fragment}
-                                            enter="transition ease-out duration-100"
-                                            enterFrom="transform opacity-0 scale-95"
-                                            enterTo="transform opacity-100 scale-100"
-                                            leave="transition ease-in duration-75"
-                                            leaveFrom="transform opacity-100 scale-100"
-                                            leaveTo="transform opacity-0 scale-95"
-                                        >
-                                            {/* Menu items */}
-                                            <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                                {userNavigation.map((item) => (
-                                                <Menu.Item key={item.name}>
-                                                    {({ active }) => (
-                                                    <Link
-                                                        href={item.href}
-                                                        className={classNames(
-                                                        active ? 'bg-gray-100' : '',
-                                                        'block px-4 py-2 text-base text-gray-700'
+                            <div className="flex">
+                                <div className="h-6 w-6">
+                                    <ThemeSwitcher />
+                                </div>
+                                {/* Profile dropdown, desktop */}
+                                <div className="hidden md:block">
+                                    <div className="ml-4 flex items-center md:ml-6">
+                                        <Menu as="div" className="relative ml-3">
+                                            {/* Button to open */}
+                                            <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                                <span className="absolute -inset-1.5" />
+                                                <span className="sr-only">Open user menu</span>
+                                                <UserCircleIcon className="block h-8 w-8 text-white" aria-hidden="true"/>
+                                                {/* <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" /> */}
+                                            </Menu.Button>
+                                            {/* Transition effect */}
+                                            <Transition
+                                                as={Fragment}
+                                                enter="transition ease-out duration-100"
+                                                enterFrom="transform opacity-0 scale-95"
+                                                enterTo="transform opacity-100 scale-100"
+                                                leave="transition ease-in duration-75"
+                                                leaveFrom="transform opacity-100 scale-100"
+                                                leaveTo="transform opacity-0 scale-95"
+                                            >
+                                                {/* Menu items */}
+                                                <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                                    {userNavigation.map((item) => (
+                                                    <Menu.Item key={item.name}>
+                                                        {({ active }) => (
+                                                        <Link
+                                                            href={item.href}
+                                                            className={classNames(
+                                                            active ? 'bg-gray-100' : '',
+                                                            'block px-4 py-2 text-base text-gray-700'
+                                                            )}
+                                                        >
+                                                            {item.name}
+                                                        </Link>
                                                         )}
-                                                    >
-                                                        {item.name}
-                                                    </Link>
-                                                    )}
-                                                </Menu.Item>
-                                                ))}
-                                            </Menu.Items>
-                                        </Transition>
-                                    </Menu>
+                                                    </Menu.Item>
+                                                    ))}
+                                                </Menu.Items>
+                                            </Transition>
+                                        </Menu>
+                                    </div>
                                 </div>
                             </div>
+
 
                             {/* Navbar dropdown button, mobile only */}
                             <div className="-mr-2 flex md:hidden">
@@ -167,14 +172,18 @@ export default function NavBar() {
                         {/* Page navigation, primary item */}
                         <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                             {navigation.map((item) => (
-                                <Link href={item.href}><Disclosure.Button
+                                <Link 
                                     key={item.name}
-                                    as="a"
-                                    className='text-black hover:bg-customBlue-light hover:text-white block rounded-md px-3 py-2 text-base font-medium'
-                                    aria-current={item.current ? 'page' : undefined}
+                                    href={item.href}
                                 >
-                                    {item.name}
-                                </Disclosure.Button></Link>
+                                    <Disclosure.Button
+                                        as="a"
+                                        className='text-black hover:bg-customBlue-light hover:text-white block rounded-md px-3 py-2 text-base font-medium'
+                                        aria-current={item.current ? 'page' : undefined}
+                                    >
+                                        {item.name}
+                                    </Disclosure.Button>
+                                </Link>
                             ))}
                         </div>
                         
@@ -193,13 +202,17 @@ export default function NavBar() {
                             </div>
                             <div className="mt-3 space-y-1 px-2">
                                 {userNavigation.map((item) => (
-                                <Link href={item.href}><Disclosure.Button
-                                    key={item.name}
-                                    as="a"
-                                    className="block rounded-md px-3 py-2 text-base font-medium text-black hover:bg-customBlue-mid hover:text-white"
+                                <Link 
+                                key={item.name}
+                                    href={item.href}
                                 >
-                                    {item.name}
-                                </Disclosure.Button></Link>
+                                    <Disclosure.Button
+                                        as="a"
+                                        className="block rounded-md px-3 py-2 text-base font-medium text-black hover:bg-customBlue-mid hover:text-white"
+                                    >
+                                        {item.name}
+                                    </Disclosure.Button>
+                                </Link>
                                 ))}
                             </div>
                         </div>

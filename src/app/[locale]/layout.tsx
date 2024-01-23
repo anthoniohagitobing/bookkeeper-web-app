@@ -2,7 +2,7 @@
 import { Metadata } from 'next';
 import { lusitana } from '@/lib/fonts';
 import LayoutSub from './layout-sub';
-import NavBar from './global/navbar/navbar';
+import { Providers } from '@/lib/providers';
 
 // CSS
 import 'react-toastify/dist/ReactToastify.css';
@@ -23,9 +23,12 @@ interface RootLayout {
 // ROOT LAYOUT
 export default function RootLayout({ children, params: {locale} }: RootLayout) {
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning> 
+    {/* Suppress hydration warning is for avoiding dark mode conflict between server and client */}
       <body className={`${lusitana.className}`}>
-        <LayoutSub childrenProp={children}/>
+        <Providers>
+          <LayoutSub childrenProp={children}/>
+        </Providers>
       </body>
     </html>
   )
