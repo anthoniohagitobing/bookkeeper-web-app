@@ -15,6 +15,7 @@ interface Props {
 export default function LayoutSub(props: Props): JSX.Element {
     const [userAuthenticated, setUserAuthenticated] = useState<boolean>(false);
     const [userEmail, setUserEmail] = useState<string>('noEmail');
+    const [userFullName, setUserFullName] = useState<string>('noFullName');
     
     // const [userId, setUserId] = useState<number>(0);
     // const [userUid, setUserUid] = useState<string>('noUid');
@@ -24,7 +25,7 @@ export default function LayoutSub(props: Props): JSX.Element {
 
     return (
         <>
-            <ContextVariables.Provider value={{userAuthenticated, userEmail, setUserAuthenticated, setUserEmail }}>
+            <ContextVariables.Provider value={{userAuthenticated, userEmail, userFullName, setUserAuthenticated, setUserEmail, setUserFullName}}>
                 <ToastContainer />
                 <Navbar />
                 {props.childrenProp}

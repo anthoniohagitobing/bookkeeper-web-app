@@ -5,8 +5,10 @@ import { createContext, Dispatch, SetStateAction } from 'react';
 interface ContextVariables {
   userAuthenticated: boolean;
   userEmail: string;
+  userFullName: string;
   setUserAuthenticated: Dispatch<SetStateAction<boolean>>;
   setUserEmail: Dispatch<SetStateAction<string>>;
+  setUserFullName: Dispatch<SetStateAction<string>>;
 
   // userId: number;
   // userUid: string;
@@ -23,8 +25,10 @@ interface ContextVariables {
 const defaultState = {
   userAuthenticated: false,
   userEmail: "NoEmail",
+  userFullName: "NoFullName",
   setUserAuthenticated: () => {},
   setUserEmail: () => {},
+  setUserFullName: () => {},
 
   // userId: 0,
   // userUid: "noUid",

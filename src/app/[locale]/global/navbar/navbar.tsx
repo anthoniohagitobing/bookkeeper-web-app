@@ -10,32 +10,39 @@ import { UserCircleIcon } from "@heroicons/react/24/solid";
 
 
 
-const navigation = [
-  { name: 'Dashboard', href: '/dashboard', current: true },
-  { name: 'Profile', href: '/profile', current: false },
-]
 
-const userNavigation = [
-  { name: 'Profile', href: '/profile' },
-//   { name: 'Settings', href: '#' },
-  { name: 'Sign Out', href: '#' },
-]
-
-function classNames(...classes: String[]) {
-    return classes.filter(Boolean).join(' ')
-  }
 
 // PAGE COMPONENT
 export default function NavBar() {
+    // STATE AND CONTEXT VARIABLES
     const { userAuthenticated } = useContext(ContextVariables);
-    const { userEmail } = useContext(ContextVariables);
+    const { userEmail, userFullName } = useContext(ContextVariables);
     // console.log(userAuthenticated);
 
+    // HELPER FUNCTION
+    function classNames(...classes: String[]) {
+        return classes.filter(Boolean).join(' ')
+    }
+
+    // ADDITIONAL DICTIONARIES FOR MAPPING COMPONENTS
     const user = {
         email: userEmail,
+        fullName: userFullName,
         // imageUrl: "",
       }
 
+    const navigation = [
+        { name: 'Dashboard', href: '/dashboard', current: true },
+        { name: 'Profile', href: '/profile', current: false },
+    ]
+      
+    const userNavigation = [
+        { name: 'Profile', href: '/profile' },
+      //   { name: 'Settings', href: '#' },
+        { name: 'Sign Out', href: '#' },
+    ]
+
+    // COMPONENTS
     return (
         <div>
             { !userAuthenticated ? (
@@ -59,11 +66,11 @@ export default function NavBar() {
                     <button>Log-in</button>
                 </Link>
             </div> */}
-            <Disclosure as="nav" className="bg-white border-b-2 border-gray-300">
+            <Disclosure as="nav" className="bg-white border-b-2 border-customGray-light">
                 {({ open }) => (
                     <>
                     {/* Navbar block */}
-                    <div className="mx-auto px-2 sm:px-4 lg:px-6">
+                    <div className="mx-auto px-4 sm:px-4 lg:px-6">
                         <div className="flex h-16 items-center justify-between">
                             {/* Per item, on left */}
                             <div className="flex items-center">
@@ -76,25 +83,20 @@ export default function NavBar() {
                                             alt="Bookkeeper logo"
                                         />
                                     </div>
-                                    <p className="text-black font-bold text-lg ml-2">Bookkeeper</p>
+                                    <p className="text-black font-bold text-xl ml-2">Bookkeeper</p>
                                 </Link>
                                 {/* Other items, only shown on desktop */}
                                 <div className="hidden md:block">
-                                    <div className="ml-10 flex items-baseline space-x-4">
+                                    <div className="ml-12 flex items-baseline space-x-4">
                                         {navigation.map((item) => (
-                                        <a
+                                        <Link
                                             key={item.name}
                                             href={item.href}
-                                            className={classNames(
-                                            item.current
-                                                ? 'bg-gray-900 text-white'
-                                                : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                            'rounded-md px-3 py-2 text-sm font-medium'
-                                            )}
+                                            className="text-black hover:bg-customBlue-mid hover:text-white rounded-md px-7 py-2 text-base font-medium"
                                             aria-current={item.current ? 'page' : undefined}
                                         >
                                             {item.name}
-                                        </a>
+                                        </Link>
                                         ))}
                                     </div>
                                 </div>
@@ -126,15 +128,15 @@ export default function NavBar() {
                                                 {userNavigation.map((item) => (
                                                 <Menu.Item key={item.name}>
                                                     {({ active }) => (
-                                                    <a
+                                                    <Link
                                                         href={item.href}
                                                         className={classNames(
                                                         active ? 'bg-gray-100' : '',
-                                                        'block px-4 py-2 text-sm text-gray-700'
+                                                        'block px-4 py-2 text-base text-gray-700'
                                                         )}
                                                     >
                                                         {item.name}
-                                                    </a>
+                                                    </Link>
                                                     )}
                                                 </Menu.Item>
                                                 ))}
@@ -144,10 +146,10 @@ export default function NavBar() {
                                 </div>
                             </div>
 
-                            {/* Profile dropdown, mobile */}
+                            {/* Navbar dropdown button, mobile only */}
                             <div className="-mr-2 flex md:hidden">
                                 {/* Mobile menu button */}
-                                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-white p-2 text-customGray-light border-2 border-customGray-light hover:bg-customBlue-light hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 ">
                                     <span className="absolute -inset-0.5" />
                                     <span className="sr-only">Open main menu</span>
                                     {open ? (
@@ -160,47 +162,44 @@ export default function NavBar() {
                         </div>
                     </div>
 
-                    {/* Navbar dropdown, for mobile only */}
-                    <Disclosure.Panel className="md:hidden">
+                    {/* Navbar dropdown paper, for mobile only */}
+                    <Disclosure.Panel className="md:hidden border-t-2 border-customGray-light bg-white fixed min-w-full min-h-screen">
                         {/* Page navigation, primary item */}
                         <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                             {navigation.map((item) => (
-                                <Disclosure.Button
+                                <Link href={item.href}><Disclosure.Button
                                     key={item.name}
                                     as="a"
-                                    href={item.href}
-                                    className={classNames(
-                                        item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                        'block rounded-md px-3 py-2 text-base font-medium'
-                                    )}
+                                    className='text-black hover:bg-customBlue-light hover:text-white block rounded-md px-3 py-2 text-base font-medium'
                                     aria-current={item.current ? 'page' : undefined}
                                 >
                                     {item.name}
-                                </Disclosure.Button>
+                                </Disclosure.Button></Link>
                             ))}
                         </div>
+                        
                         {/* Page navigation, user item */}
-                        <div className="border-t border-gray-700 pb-3 pt-4">
+                        <div className="border-t border-customGray-light pb-3 pt-4">
                             {/* User info */}
                             <div className="flex items-center px-5">
                                 <div className="flex-shrink-0">
                                     {/* <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" /> */}
-                                    <UserCircleIcon className="block h-8 w-8 text-white" aria-hidden="true"/>
+                                    <UserCircleIcon className="block h-10 w-10" aria-hidden="true"/>
                                 </div>
                                 <div className="ml-3">
-                                    <div className="text-sm font-medium leading-none text-gray-400">{user.email}</div>
+                                    <div className="text-base font-medium leading-none text-black">{user.fullName}</div>
+                                    <div className="text-sm font-medium leading-none text-customGray-mid">{user.email}</div>
                                 </div>
                             </div>
                             <div className="mt-3 space-y-1 px-2">
                                 {userNavigation.map((item) => (
-                                <Disclosure.Button
+                                <Link href={item.href}><Disclosure.Button
                                     key={item.name}
                                     as="a"
-                                    href={item.href}
-                                    className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+                                    className="block rounded-md px-3 py-2 text-base font-medium text-black hover:bg-customBlue-mid hover:text-white"
                                 >
                                     {item.name}
-                                </Disclosure.Button>
+                                </Disclosure.Button></Link>
                                 ))}
                             </div>
                         </div>
