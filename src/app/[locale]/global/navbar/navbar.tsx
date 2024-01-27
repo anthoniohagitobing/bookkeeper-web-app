@@ -1,11 +1,11 @@
 'use client';
 
 // IMPORT MODULES
-import { Link, usePathname } from "../../../../navigation";
+import { Link, usePathname, useRouter } from "../../../../navigation";
 import { ContextVariables } from '../../../../lib/context-variables';
 import react, { useState, useEffect, useContext, Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon, LanguageIcon } from '@heroicons/react/24/outline'
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 
 // SUB-COMPONENTS
@@ -18,9 +18,19 @@ export default function NavBar() {
     const { userEmail, userFullName } = useContext(ContextVariables);
     // console.log(userAuthenticated);
 
+    // NAVIGATION SETUP
+    const router = useRouter();
+    const pathname = usePathname();
+
     // HELPER FUNCTION
+    // Join function for classname
     function classNames(...classes: String[]) {
         return classes.filter(Boolean).join(' ')
+    }
+
+    // Change locale
+    function changeLocale(locale: string) {
+        router.replace(`${pathname}`, {locale: locale});
     }
 
     // ADDITIONAL DICTIONARIES FOR MAPPING COMPONENTS
@@ -39,6 +49,12 @@ export default function NavBar() {
         { name: 'Profile', href: '/profile' },
       //   { name: 'Settings', href: '#' },
         { name: 'Sign Out', href: '#' },
+    ]
+
+    const locale = [
+        { acronym: 'en', displayName: 'English-US'},
+        { acronym: 'id', displayName: 'Indonesia'},
+        { acronym: 'jp', displayName: '日本語'}
     ]
 
     // COMPONENTS
@@ -101,9 +117,44 @@ export default function NavBar() {
                                 </div>
                             </div>
 
-                            <div className="flex">
+                            <div className="flex h-full items-center">
+                                <Menu as="div" className="relative ml-3">
+                                    <Menu.Button>
+                                        <span className="absolute -inset-1.5" />
+                                        <span className="sr-only">Change language</span>
+                                        <LanguageIcon className="block h-8 w-8 border-2 border-black rounded-full p-px" aria-hidden="true"/>
+                                    </Menu.Button>
+                                    <Transition
+                                        as={Fragment}
+                                        enter="transition ease-out duration-100"
+                                        enterFrom="transform opacity-0 scale-95"
+                                        enterTo="transform opacity-100 scale-100"
+                                        leave="transition ease-in duration-75"
+                                        leaveFrom="transform opacity-100 scale-100"
+                                        leaveTo="transform opacity-0 scale-95"
+                                    >
+                                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                            {locale.map((item) => (
+                                            <Menu.Item key={item.acronym}>
+                                                {({ active }) => (
+                                                <div
+                                                    onClick={() => changeLocale(item.acronym)}
+                                                    className={classNames(
+                                                    active ? 'bg-gray-100' : '',
+                                                    'block px-4 py-2 text-base text-gray-700'
+                                                    )}
+                                                >
+                                                    {item.displayName}
+                                                </div>
+                                                )}
+                                            </Menu.Item>
+                                            ))}
+                                        </Menu.Items>
+                                    </Transition>
+                                </Menu>
                                 <div className="h-6 w-6">
                                     <ThemeSwitcher />
+                                    {/* <p>alsjd;f</p> */}
                                 </div>
                                 {/* Profile dropdown, desktop */}
                                 <div className="hidden md:block">
@@ -177,7 +228,7 @@ export default function NavBar() {
                                     href={item.href}
                                 >
                                     <Disclosure.Button
-                                        as="a"
+                                        as="div"
                                         className='text-black hover:bg-customBlue-light hover:text-white block rounded-md px-3 py-2 text-base font-medium'
                                         aria-current={item.current ? 'page' : undefined}
                                     >
@@ -207,7 +258,7 @@ export default function NavBar() {
                                     href={item.href}
                                 >
                                     <Disclosure.Button
-                                        as="a"
+                                        as="div"
                                         className="block rounded-md px-3 py-2 text-base font-medium text-black hover:bg-customBlue-mid hover:text-white"
                                     >
                                         {item.name}
