@@ -37,7 +37,8 @@ export default function ProfileComponent(): JSX.Element {
     }
 
     // INITIAL USE EFFECT
-    // From local storage, retrieve user and access token> Note that you need to parse it as it is in json
+    // From local storage, retrieve user refresh token. Note that you need to parse it as it is in json
+    // Refresh token is required so that it can be blacklisted in the back end
     // Because it is retrieving from local storage, we need to use useEffect
     useEffect(() => {
         const jsonRefreshToken: string = secureLocalStorage.getItem("refresh_token") as string;
