@@ -40,13 +40,17 @@ export default function CheckAuthComponent(): JSX.Element {
         // If user is has been globally authenticated, 
         if (userAuthenticated) {
             // If currently on log-in or password, push to dashboard. This is to prevent double log-in
-            if (pathname === "/user/log-in" || pathname === "user/sign-up") {
+            if (pathname === "/user/log-in" || pathname === "/user/sign-up") {
                 router.push("/dashboard");
             }
 
-        // If user has not been globally authenticated and not in log-in, then perform authentication
-        } else if (!userAuthenticated && pathname !== "/user/log-in") {
-            checkAuthFunction();
+        // If user has not been globally authenticated and not in log-in or sign-up, then perform authentication
+        } else if (!userAuthenticated) {
+            if (pathname === "/user/log-in" || pathname === "/user/sign-up") {
+                return;
+            } else {
+                checkAuthFunction();
+            }
         }
     }, []);
 
