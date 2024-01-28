@@ -27,7 +27,7 @@ export default function RootLayout({ children, params: {locale} }: RootLayout) {
     {/* Suppress hydration warning is for avoiding dark mode conflict between server and client */}
       <body className={`${lusitana.className}`}>
         <Providers>
-          <LayoutSub childrenProp={children}/>
+          <LayoutSub childrenProp={children} currentLocale={locale}/>
         </Providers>
       </body>
     </html>

@@ -8,7 +8,8 @@ import Navbar from './global/navbar/navbar';
 
 // DATA TYPE
 interface Props {
-    childrenProp: React.ReactNode;
+    childrenProp: React.ReactNode,
+    currentLocale: string
 }
 
 // PAGE COMPONENT
@@ -27,7 +28,7 @@ export default function LayoutSub(props: Props): JSX.Element {
         <>
             <ContextVariables.Provider value={{userAuthenticated, userEmail, userFullName, setUserAuthenticated, setUserEmail, setUserFullName}}>
                 <ToastContainer />
-                <Navbar />
+                <Navbar currentLocale={props.currentLocale}/>
                 {props.childrenProp}
             </ContextVariables.Provider>
         </>

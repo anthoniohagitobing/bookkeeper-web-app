@@ -41,11 +41,11 @@ export default function ThemeSwitcher() {
     // }
 
     return (
-            <Menu as="div" className="relative ml-3">
-                <Menu.Button>
+            <Menu as="div" className="relative">
+                <Menu.Button className="hover:bg-customGray-light rounded-full">
                     <span className="absolute -inset-1.5" />
                     <span className="sr-only">Change light or dark mode</span>
-                    {resolvedTheme === 'light' ? <SunIcon className="block h-8 w-8" aria-hidden="true"/> : <MoonIcon className="block h-8 w-8" aria-hidden="true"/>}
+                    {resolvedTheme === 'light' ? <SunIcon className="block h-8 w-8 border-2 border-black rounded-full p-px" aria-hidden="true"/> : <MoonIcon className="block h-8 w-8 border-2 border-black rounded-full p-px" aria-hidden="true"/>}
                 </Menu.Button>
                 <Transition
                     as={Fragment}
@@ -56,17 +56,18 @@ export default function ThemeSwitcher() {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                 >
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Items className="absolute right-0 z-10 mt-2 w-24 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <Menu.Item>
                             {({ active }) => (
                             <div
                                 onClick={ () => setTheme('light')}
                                 className={classNames(
-                                active ? 'bg-gray-100' : '',
-                                'px-4 py-2 text-base text-gray-700 flex items-center'
+                                active ? 'bg-gray-100 cursor-pointer' : '',
+                                resolvedTheme === 'light' ? 'text-customBlue-light font-bold' : 'text-black',
+                                'px-4 py-2 text-base flex items-center gap-2'
                                 )}
                             >
-                                <SunIcon />
+                                <SunIcon className="block h-8 w-8"/>
                                 <p>Light</p>
                             </div>
                             )}
@@ -76,11 +77,12 @@ export default function ThemeSwitcher() {
                             <div
                                 onClick={ () => setTheme('dark')}
                                 className={classNames(
-                                active ? 'bg-gray-100' : '',
-                                'px-4 py-2 text-base text-gray-700 flex items-center'
+                                active ? 'bg-gray-100 cursor-pointer' : '',
+                                resolvedTheme === 'dark' ? 'text-customBlue-light font-bold' : 'text-black',
+                                'px-4 py-2 text-base flex items-center gap-2'
                                 )}
                             >
-                                <MoonIcon />
+                                <MoonIcon className="block h-8 w-8"/>
                                 <p>Dark</p>
                             </div>
                             )}
