@@ -9,8 +9,9 @@ import { toast } from 'react-toastify';
 // INTERFACE
 interface FormData {
     email: string,
-    first_name: string,
-    last_name: string,
+    // first_name: string,
+    // last_name: string,
+    full_name: string,
     password: string,
     password2: string,
 }
@@ -20,8 +21,9 @@ export default function SignUpComponent(): JSX.Element {
     // STATE VARIABLES
     const [formData, setFormData] = useState<FormData>({
         email: "",
-        first_name: "",
-        last_name: "",
+        // first_name: "",
+        // last_name: "",
+        full_name: "",
         password: "",
         password2: "",
     });
@@ -42,7 +44,8 @@ export default function SignUpComponent(): JSX.Element {
         e.preventDefault();
 
         // Guard clause to throw error if one of the field is missing
-        if (!formData.email || !formData.first_name || !formData.last_name || !formData.password || !formData.password2) {
+        // if (!formData.email || !formData.first_name || !formData.last_name || !formData.password || !formData.password2) {
+        if (!formData.email || !formData.full_name || !formData.password || !formData.password2) {
             setError("All fields are required");
             return;
         }
@@ -84,7 +87,7 @@ export default function SignUpComponent(): JSX.Element {
                             required
                         />
                     </div>
-                    <div>
+                    {/* <div>
                         <label htmlFor="first_name">First Name:</label>
                         <input 
                             name="first_name"
@@ -102,6 +105,17 @@ export default function SignUpComponent(): JSX.Element {
                             id="last_name"
                             type="text"
                             value={formData.last_name}
+                            onChange={handleOnChange}
+                            required
+                        />
+                    </div> */}
+                    <div>
+                        <label htmlFor="last_name">Full Name:</label>
+                        <input 
+                            name="full_name"
+                            id="full_name"
+                            type="text"
+                            value={formData.full_name}
                             onChange={handleOnChange}
                             required
                         />
