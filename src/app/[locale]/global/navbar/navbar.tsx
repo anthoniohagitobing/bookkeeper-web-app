@@ -20,8 +20,6 @@ export default function NavBar({currentLocale}: {currentLocale: string}) {
     // STATE AND CONTEXT VARIABLES
     const { userAuthenticated } = useContext(ContextVariables);
     const { userEmail, userFullName } = useContext(ContextVariables);
-    // console.log(userAuthenticated);
-    const [refreshToken, setRefreshToken] = useState<string | null >(null);
     const { setUserAuthenticated } = useContext(ContextVariables);
 
     // NAVIGATION SETUP
@@ -41,7 +39,14 @@ export default function NavBar({currentLocale}: {currentLocale: string}) {
 
     // Logout
     async function handleLogout() {
-        const url: string = "user/logout/"
+        // From local storage, retrieve user refresh token. Note that you need to parse it as it is in json
+        // Refresh token is required so that it can be blacklisted in the back end
+        // Note that you cannot use useEffect as navbar is only loaded once at the start of the page load. Once log-in, the navbar is no longer reloaded
+        const jsonRefreshToken: string = secureLocalStorage.getItem("refresh_token") as string;
+        const refreshToken = JSON.parse(jsonRefreshToken);
+
+
+        const url: string = "user/logout/";
         const res: AxiosResponse<any, any> = await axiosInstance.post(url, {"refresh_token": refreshToken})
         if (res.status = 200) {
             // Remove token from local storage
@@ -56,14 +61,6 @@ export default function NavBar({currentLocale}: {currentLocale: string}) {
             router.push("/user/log-in/");
         }
     }
-    // INITIAL USE EFFECT
-    // From local storage, retrieve user refresh token. Note that you need to parse it as it is in json
-    // Refresh token is required so that it can be blacklisted in the back end
-    // Because it is retrieving from local storage, we need to use useEffect
-    useEffect(() => {
-        const jsonRefreshToken: string = secureLocalStorage.getItem("refresh_token") as string;
-        setRefreshToken(jsonRefreshToken ? JSON.parse(jsonRefreshToken) : null);
-    }, []);
 
     // ADDITIONAL DICTIONARIES FOR MAPPING COMPONENTS
     const user = {
@@ -181,11 +178,10 @@ export default function NavBar({currentLocale}: {currentLocale: string}) {
                                         <div className="hidden md:block">
                                             <Menu as="div" className="relative">
                                                 {/* Button to open */}
-                                                <Menu.Button className="max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                                <Menu.Button className="block border-black rounded-full">
                                                     <span className="absolute -inset-1.5" />
                                                     <span className="sr-only">Open user menu</span>
-                                                    {/* <p>asdf</p> */}
-                                                    <UserCircleIcon className="block h-8 w-8 text-white" aria-hidden="true"/>
+                                                    <UserCircleIcon className="block h-10 w-10" aria-hidden="true"/>
                                                     {/* <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" /> */}
                                                 </Menu.Button>
                                                 {/* Transition effect */}
@@ -200,6 +196,26 @@ export default function NavBar({currentLocale}: {currentLocale: string}) {
                                                 >
                                                     {/* Menu items */}
                                                     <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                                        <Menu.Item>
+                                                            {({ active }) => (
+                                                            <div
+                                                                className='block px-4 py-2 text-base text-black'
+                                                            >
+                                                                {/* <div className="border-t border-customGray-light pb-3 pt-4"> */}
+                                                                {/* User info */}
+                                                                <div className="flex ">
+                                                                    <div className="flex-shrink-0">
+                                                                        {/* <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" /> */}
+                                                                        <UserCircleIcon className="block h-10 w-10 text-black bg-white" aria-hidden="true"/>
+                                                                    </div>
+                                                                    <div className="ml-3">
+                                                                        <div className="text-base font-medium leading-none text-black">{user.fullName}</div>
+                                                                        <div className="text-sm font-medium leading-none text-customGray-mid">{user.email}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            )}
+                                                        </Menu.Item>
                                                         {userNavigation.map((item) => (
                                                             <Menu.Item key={item.name}>
                                                                 {({ active }) => (
@@ -307,7 +323,7 @@ export default function NavBar({currentLocale}: {currentLocale: string}) {
                                 ))}
                                 <Disclosure.Button
                                     as="div"
-                                    className="block rounded-md px-3 py-2 text-base font-medium text-black hover:bg-customBlue-mid hover:text-white"
+                                    className="block rounded-md px-3 py-2 text-base font-medium text-black hover:bg-customBlue-mid hover:text-white hover:cursor-pointer"
                                     onClick={handleLogout}
                                 >
                                     Log-out
