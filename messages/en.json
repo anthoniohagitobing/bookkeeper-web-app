@@ -1,8 +1,8 @@
 {
-  "Index": {
-    "title": "English"
+  "Home": {
+    "title": "Welcome to Bookkeeper"
   },
   "NotFoundPage": {
-    "title": "Not found english"
+    "title": "Page not found"
   }
 }

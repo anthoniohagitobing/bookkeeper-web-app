@@ -1,15 +1,16 @@
 'use client';
 
 // MODULES IMPORT
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios, { AxiosResponse } from "axios";
 import { useRouter, Link } from "../../../../navigation";
 import { toast } from 'react-toastify';
 import secureLocalStorage from "react-secure-storage";
+import { ContextVariables } from '../../../../lib/context-variables';
 
 // PAGE COMPONENT
 export default function LogInComponent(): JSX.Element {
-    // STATE VARIABLES
+    // STATE AND CONTEXT VARIABLES
     const [loginData, setLoginData] = useState({
         email: "",
         password: "",
@@ -50,14 +51,14 @@ export default function LogInComponent(): JSX.Element {
 
         // Check response
         if (res.status === 200) {
-            // If success, set additional token and user data
+            // If success, set tokens to secure local storage. Note that local storage only received strings.
             // secureLocalStorage.setItem('user', JSON.stringify(user));
             secureLocalStorage.setItem("access_token", JSON.stringify(res.data.access_token));
             secureLocalStorage.setItem("refresh_token", JSON.stringify(res.data.refresh_token));
 
             // Redirect to verify email component
             toast.success("Login successful");
-            router.push("/profile/");
+            router.push("/dashboard/");
         }
         // Server error 
     }
@@ -93,6 +94,7 @@ export default function LogInComponent(): JSX.Element {
                 </div>
                 <button type="submit">Submit</button>
                 <Link href="/user/forgot-password">Forgot Password</Link>
+                <p>Don't have an account? <Link href="/user/sign-up">Sign up</Link></p>
             </form>
         </div>
     )

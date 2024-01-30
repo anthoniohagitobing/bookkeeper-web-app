@@ -6,6 +6,7 @@ import react, { useState, useEffect, useContext } from 'react';
 import { useRouter, usePathname } from '../../../navigation';
 import { ContextVariables } from '../../../lib/context-variables';
 import axiosInstance from "@/lib/axios-instance";
+import secureLocalStorage from "react-secure-storage";
 
 // FUNCTION
 export default function CheckAuthComponent(): JSX.Element {
@@ -13,6 +14,7 @@ export default function CheckAuthComponent(): JSX.Element {
     const [checkAuthFinish, setCheckAuthFinish] = useState<boolean>(false);
     const [Authenticated, setAuthenticated] = useState<boolean>(false);
     const { userAuthenticated, setUserAuthenticated } = useContext(ContextVariables);
+    const { setUserEmail, setUserFullName } = useContext(ContextVariables);
 
     // NAVIGATION SETUP
     const router = useRouter();
@@ -23,9 +25,17 @@ export default function CheckAuthComponent(): JSX.Element {
     // Note that you cannot move this to server side as the axios intercepted takes in token from local storage which is done on client
     async function checkAuthFunction() {
         try {
+            const jsonAccessToken: string = secureLocalStorage.getItem("access_token") as string;
+            const accessToken = JSON.parse(jsonAccessToken);
+            // console.log(accessToken);
+
             const url: string = `user/check/`;
-            const res = await axiosInstance.get(url);
-            // console.log(res);
+            const res = await axiosInstance.post(url, {"access_token": accessToken});
+            
+            // Set context variables
+            setUserEmail(res.data.email)
+            setUserFullName(res.data.full_name)
+
             setAuthenticated(true);
         } catch (err) {
             // console.log(err);
@@ -40,13 +50,17 @@ export default function CheckAuthComponent(): JSX.Element {
         // If user is has been globally authenticated, 
         if (userAuthenticated) {
             // If currently on log-in or password, push to dashboard. This is to prevent double log-in
-            if (pathname === "/user/log-in" || pathname === "user/sign-up") {
+            if (pathname === "/user/log-in" || pathname === "/user/sign-up") {
                 router.push("/dashboard");
             }
 
-        // If user has not been globally authenticated and not in log-in, then perform authentication
-        } else if (!userAuthenticated && pathname !== "/user/log-in") {
-            checkAuthFunction();
+        // If user has not been globally authenticated and not in log-in or sign-up, then perform authentication
+        } else if (!userAuthenticated) {
+            if (pathname === "/user/log-in" || pathname === "/user/sign-up") {
+                return;
+            } else {
+                checkAuthFunction();
+            }
         }
     }, []);
 
