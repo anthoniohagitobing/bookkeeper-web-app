@@ -31,7 +31,7 @@ export default function CheckAuthComponent(): JSX.Element {
 
             const url: string = `user/check/`;
             const res = await axiosInstance.post(url, {"access_token": accessToken});
-            console.log(res)
+            
             // Set context variables
             setUserEmail(res.data.email)
             setUserFullName(res.data.full_name)

@@ -176,7 +176,7 @@ export default function NavBar({currentLocale}: {currentLocale: string}) {
                                     <>
                                         {/* Profile dropdown, desktop */}
                                         <div className="hidden md:block">
-                                            <Menu as="div" className="relative">
+                                            <Menu as="div" className="relative hidden md:block">
                                                 {/* Button to open */}
                                                 <Menu.Button className="block border-black rounded-full">
                                                     <span className="absolute -inset-1.5" />

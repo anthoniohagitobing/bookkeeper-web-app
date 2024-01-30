@@ -1,7 +1,7 @@
 'use client';
 
 import Image from "next/image";
-import { MoonIcon, SunIcon } from '@heroicons/react/24/outline';
+import { MoonIcon, SunIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 import { Menu, Transition } from '@headlessui/react'
 import react, { useState, useEffect, Fragment } from 'react';
 import { useTheme } from "next-themes";
@@ -45,7 +45,8 @@ export default function ThemeSwitcher() {
                 <Menu.Button className="hover:bg-customGray-light rounded-full">
                     <span className="absolute -inset-1.5" />
                     <span className="sr-only">Change light or dark mode</span>
-                    {resolvedTheme === 'light' ? <SunIcon className="block h-8 w-8 border-2 border-black rounded-full p-px" aria-hidden="true"/> : <MoonIcon className="block h-8 w-8 border-2 border-black rounded-full p-px" aria-hidden="true"/>}
+                    {/* <SunIcon className="block h-8 w-8" /> */}
+                    {resolvedTheme   === 'light' ? <SunIcon className="block h-8 w-8 border-2 border-black rounded-full p-px" aria-hidden="true"/> : <MoonIcon className="block h-8 w-8 border-2 border-black rounded-full p-px" aria-hidden="true"/>}
                 </Menu.Button>
                 <Transition
                     as={Fragment}
