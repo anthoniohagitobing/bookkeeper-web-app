@@ -1,8 +1,12 @@
 {
   "Home": {
-    "title": "Welcome to Bookkeeper"
+    "Title": "Welcome to Bookkeeper",
+    "Description": "Here at Bookkeeper, we allow you to manage your personal finance and investment",
+    "Button": "Get started"
   },
-  "NotFoundPage": {
-    "title": "Page not found"
+  "PageNotFound": {
+    "Error": "Error 404:",
+    "Title": "Page not found",
+    "Link": "Click here to go back to home page"
   }
 }

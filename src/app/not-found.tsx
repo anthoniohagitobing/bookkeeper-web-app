@@ -10,8 +10,10 @@ export default function NotFound() {
     <html lang="en">
       <body>
         {/* <Error statusCode={404} /> */}
-        <h1>Page not found</h1>
-        <Link href="/en/">Press here to go back to home page</Link>
+        <div>
+          <h1>Sorry, page not found</h1>
+          <Link href="/en/">Press here to go back to home page</Link>
+        </div>
       </body>
     </html>
   );

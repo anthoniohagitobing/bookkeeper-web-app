@@ -16,8 +16,8 @@ const config: Config = {
       colors: {
         customBlue: {
           light:'#1f26c1',
-          mid:'#0d104f',
-          dark:'#04051c',
+          mid:'#161b8e',
+          dark:'#0d104f',
         },
         customGray: {
           light: '#d1d5db',
