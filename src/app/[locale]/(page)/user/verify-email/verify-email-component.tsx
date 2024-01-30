@@ -4,7 +4,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from 'react-toastify';
-import { useRouter } from "../../../../navigation";
+import { useRouter } from "@/navigation";
 
 // PAGE COMPONENT
 export default function VerifyEmailComponent(): JSX.Element {

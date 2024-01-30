@@ -2,9 +2,9 @@
 
 // MODULES IMPORT
 import React, { useEffect, useState, useContext } from "react";
-import { useRouter } from "../../../navigation";
+import { useRouter } from "../../../../navigation";
 import axiosInstance from "@/lib/axios-instance";
-import { ContextVariables } from '../../../lib/context-variables';
+import { ContextVariables } from '../../../../lib/context-variables';
 import { toast } from 'react-toastify';
 import axios, { AxiosResponse } from "axios";
 import secureLocalStorage from "react-secure-storage";

@@ -1,8 +1,8 @@
 'use client';
 
 // IMPORT MODULES
-import { Link, usePathname, useRouter } from "../../../../navigation";
-import { ContextVariables } from '../../../../lib/context-variables';
+import { Link, usePathname, useRouter } from "@/navigation";
+import { ContextVariables } from '@/lib/context-variables';
 import react, { useState, useEffect, useContext, Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon, LanguageIcon } from '@heroicons/react/24/outline'

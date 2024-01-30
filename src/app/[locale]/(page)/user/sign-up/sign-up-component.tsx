@@ -3,7 +3,7 @@
 // MODULES IMPORT
 import React, { useState } from "react";
 import axios, { AxiosResponse } from "axios";
-import { useRouter, Link } from "../../../../navigation";
+import { useRouter, Link } from "@/navigation";
 import { toast } from 'react-toastify';
 
 // INTERFACE

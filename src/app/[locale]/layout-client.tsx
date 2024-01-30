@@ -4,16 +4,14 @@
 import { ContextVariables } from '../../lib/context-variables';
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
-import Navbar from './global/navbar/navbar';
 
 // DATA TYPE
 interface Props {
     childrenProp: React.ReactNode,
-    currentLocale: string
 }
 
 // PAGE COMPONENT
-export default function LayoutSub(props: Props): JSX.Element {
+export default function LayoutClient(props: Props): JSX.Element {
     const [userAuthenticated, setUserAuthenticated] = useState<boolean>(false);
     const [userEmail, setUserEmail] = useState<string>('noEmail');
     const [userFullName, setUserFullName] = useState<string>('noFullName');
@@ -28,7 +26,6 @@ export default function LayoutSub(props: Props): JSX.Element {
         <>
             <ContextVariables.Provider value={{userAuthenticated, userEmail, userFullName, setUserAuthenticated, setUserEmail, setUserFullName}}>
                 <ToastContainer />
-                <Navbar currentLocale={props.currentLocale}/>
                 {props.childrenProp}
             </ContextVariables.Provider>
         </>

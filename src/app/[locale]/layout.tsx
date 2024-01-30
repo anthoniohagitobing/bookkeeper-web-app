@@ -1,7 +1,7 @@
 // IMPORT MODULES
 import { Metadata } from 'next';
 import { lusitana } from '@/lib/fonts';
-import LayoutSub from './layout-sub';
+import LayoutClient from './layout-client';
 import { Providers } from '@/lib/providers';
 
 // CSS
@@ -27,7 +27,7 @@ export default function RootLayout({ children, params: {locale} }: RootLayout) {
     {/* Suppress hydration warning is for avoiding dark mode conflict between server and client */}
       <body className={`${lusitana.className}`}>
         <Providers>
-          <LayoutSub childrenProp={children} currentLocale={locale}/>
+          <LayoutClient childrenProp={children}/>
         </Providers>
       </body>
     </html>

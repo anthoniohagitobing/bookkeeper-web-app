@@ -3,8 +3,8 @@
 // MODULES IMPORT
 import { toast } from 'react-toastify';
 import react, { useState, useEffect, useContext } from 'react';
-import { useRouter, usePathname } from '../../../navigation';
-import { ContextVariables } from '../../../lib/context-variables';
+import { useRouter, usePathname } from '@/navigation';
+import { ContextVariables } from '@/lib/context-variables';
 import axiosInstance from "@/lib/axios-instance";
 import secureLocalStorage from "react-secure-storage";
 

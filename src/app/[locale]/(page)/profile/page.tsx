@@ -1,6 +1,6 @@
 // MODULES IMPORT
 import ProfileComponent from './profile-component';
-import CheckAuthComponent from "../global/check-auth-component";
+import CheckAuthComponent from "../_global/check-auth-component";
 
 // PAGE COMPONENT
 export default async function Profile(): Promise<JSX.Element> {

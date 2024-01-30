@@ -2,7 +2,7 @@
 
 // MODULES IMPORT
 import React, { useEffect, useState } from "react";
-import { useRouter } from "../../../navigation";
+import { useRouter } from "../../../../navigation";
 import axiosInstance from "@/lib/axios-instance";
 import { toast } from 'react-toastify';
 import axios, { AxiosResponse } from "axios";

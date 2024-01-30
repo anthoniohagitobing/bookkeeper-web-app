@@ -3,10 +3,10 @@
 // MODULES IMPORT
 import React, { useState, useContext } from "react";
 import axios, { AxiosResponse } from "axios";
-import { useRouter, Link } from "../../../../navigation";
+import { useRouter, Link } from "@/navigation";
 import { toast } from 'react-toastify';
 import secureLocalStorage from "react-secure-storage";
-import { ContextVariables } from '../../../../lib/context-variables';
+import { ContextVariables } from '@/lib/context-variables';
 
 // PAGE COMPONENT
 export default function LogInComponent(): JSX.Element {
