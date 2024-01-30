@@ -22,6 +22,12 @@ const config: Config = {
         customGray: {
           light: '#d1d5db',
           mid: '#a0a3a7',
+        },
+        customBackground: {
+          lightBlock: '#ffffff',
+          lightLine: '#d1d5db',
+          darkBlock: '#18181b',
+          darkLine: '#303036',
         }
       }
     },

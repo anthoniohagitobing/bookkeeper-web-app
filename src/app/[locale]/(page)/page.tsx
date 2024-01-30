@@ -1,5 +1,5 @@
 // MODULES IMPORT
-import {useTranslations} from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { Link } from "@/navigation"
 
 // PAGE COMPONENT
