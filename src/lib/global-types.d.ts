@@ -4,3 +4,7 @@ export interface UserCreate {
     firstName: string,
     lastName: string,
   }
+
+export interface Translation {
+  [index: string]: string
+}

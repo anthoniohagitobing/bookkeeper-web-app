@@ -23,7 +23,7 @@ const config: Config = {
           light: '#d1d5db',
           mid: '#a0a3a7',
         },
-        customBackground: {
+        customTheme: {
           lightBlock: '#ffffff',
           lightLine: '#d1d5db',
           darkBlock: '#18181b',

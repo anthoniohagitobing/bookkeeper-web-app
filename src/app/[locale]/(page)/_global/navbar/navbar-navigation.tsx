@@ -4,16 +4,17 @@
 import { Link } from "@/navigation";
 import { useContext } from "react";
 import { ContextVariables } from '@/lib/context-variables';
+import { Translation } from "@/lib/global-types";
 
-// Navigation library
-const navigation = [
-    { name: 'Dashboard', href: '/dashboard', current: true },
-    { name: 'Profile', href: '/profile', current: false },
-]
-
-export default function NavBarNavigation(): JSX.Element {
+export default function NavBarNavigation({t}:{t: Translation}): JSX.Element {
     // STATE AND CONTEXT VARIABLES
     const { userAuthenticated } = useContext(ContextVariables);
+
+    // Navigation library
+    const navigation = [
+        { name: t.NavigationDashboard, href: '/dashboard', current: true },
+        { name: t.NavigationProfile, href: '/profile', current: false },
+    ]
 
     // If user is not authenticated, return no navigation button
     if (!userAuthenticated) {
