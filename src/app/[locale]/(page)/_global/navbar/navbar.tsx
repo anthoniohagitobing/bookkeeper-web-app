@@ -4,11 +4,12 @@ import { Translation } from '@/lib/global-types';
 import { getLocale } from 'next-intl/server';
 
 // Sub-page component
-import NavBarLogo from "./navbar-logo"
+import NavBarLogo from "./navbar-logo";
 import NavBarSideBar from './navbar-sidebar';
 import NavBarNavigation from './navbar-navigation';
 import NavBarTheme from './navbar-theme';
-import NavBarLocale from './navbar-locale'
+import NavBarLocale from './navbar-locale';
+import NavBarAccount from './navbar-account';
 
 export default async function NavBar() {
     const t = useTranslations('NavBar');
@@ -37,6 +38,7 @@ export default async function NavBar() {
             <div className="flex items-center gap-3">
                 <NavBarLocale currentLocale={currentLocale}/>
                 <NavBarTheme />
+                <NavBarAccount />
                 <NavBarSideBar />
             </div>
         </nav>

@@ -36,7 +36,7 @@ export default function NavBarSideBar(): JSX.Element {
             <aside 
                 id="drawer-navigation" 
                 className={classNames(
-                    "fixed top-0 left-0 z-40 w-64 h-screen p-4 overflow-y-auto transition-transform  bg-white dark:bg-gray-800",
+                    "fixed top-0 left-0 z-40 w-64 h-screen p-4 overflow-y-auto transition-transform bg-white dark:bg-gray-800",
                     open ? "" : "-translate-x-full",
                 )}
                 tabIndex={-1} aria-labelledby="drawer-navigation-label"

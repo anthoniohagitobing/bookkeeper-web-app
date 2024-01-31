@@ -1,8 +1,8 @@
 'use client';
 
 // IMPORT MODULES
-import { Link, usePathname, useRouter } from "@/navigation";
-import react, { useState, useEffect } from 'react';
+import { usePathname, useRouter } from "@/navigation";
+import { useState } from 'react';
 import { classNames } from "@/lib/helper-function";
 
 export default function NavBarLocale({currentLocale}: {currentLocale: string}) {
@@ -50,17 +50,17 @@ export default function NavBarLocale({currentLocale}: {currentLocale: string}) {
             {/* Dropdown menu */}
             <menu 
                 className={classNames(
-                    open ? "absolute" : "hidden",
-                    "right-0 z-20 mt-10 font-normal bg-white origin-top-right rounded-lg shadow w-32 dark:divide-gray-600",
+                    open ? "visible opacity-100" : "invisible opacity-0",
+                    "absolute transition-all right-0 z-20 mt-10 font-normal bg-white origin-top-right rounded-lg shadow w-32 dark:divide-gray-600",
                 )}
             >
-                <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+                <ul className="py-2 text-sm" aria-labelledby="dropdownHoverButton">
                     {availableLocale.map((item) => (
                         <li 
                             key={item.acronym}
                             onClick={() => {
-                                setOpen(prevCheck => !prevCheck)
                                 changeLocale(item.acronym)
+                                setOpen(prevCheck => !prevCheck)
                             }}
                             className={classNames(
                             currentLocale === item.acronym ? 'text-customBlue-light font-bold' : 'text-black',

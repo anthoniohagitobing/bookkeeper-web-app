@@ -2,7 +2,7 @@
 
 // IMPORT MODULES
 import Image from "next/image";
-import react, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useTheme } from "next-themes";
 import { classNames } from "@/lib/helper-function";
 
@@ -58,11 +58,11 @@ export default function NavBarTheme() {
             {/* Dropdown menu */}
             <menu 
                 className={classNames(
-                    open ? "absolute" : "hidden",
-                    "right-0 z-20 mt-10 font-normal bg-white origin-top-right rounded-lg shadow w-24 dark:divide-gray-600",
+                    open ? "visible opacity-100" : "invisible opacity-0",
+                    "absolute transition-all right-0 z-20 mt-10 font-normal bg-white origin-top-right rounded-lg shadow w-24 dark:divide-gray-600",
                 )}
             >
-                <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+                <ul className="py-2 text-sm" aria-labelledby="dropdownHoverButton">
                     <li>
                         <div
                             onClick={() => {
