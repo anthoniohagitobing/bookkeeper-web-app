@@ -7,7 +7,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
     return (
         <div className='min-h-screen'>
             <NavBarOld currentLocale={locale}/>
-            <NavBar currentLocale={locale}/>
+            <NavBar />
             <div className='flex grow'>{children}</div>
         </div>
     )

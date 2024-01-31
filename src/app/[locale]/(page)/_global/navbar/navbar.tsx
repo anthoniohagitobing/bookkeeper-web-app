@@ -1,15 +1,18 @@
 // IMPORT MODULES
-import {useTranslations} from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { Translation } from '@/lib/global-types';
+import { getLocale } from 'next-intl/server';
 
 // Sub-page component
 import NavBarLogo from "./navbar-logo"
 import NavBarSideBar from './navbar-sidebar';
 import NavBarNavigation from './navbar-navigation';
 import NavBarTheme from './navbar-theme';
+import NavBarLocale from './navbar-locale'
 
-export default function NavBar({currentLocale}: {currentLocale: string}) {
+export default async function NavBar() {
     const t = useTranslations('NavBar');
+    const currentLocale: string = await getLocale();
 
     const sideBarTranslations: {[index: string]: string;} = {
         test1: t('test1'),
@@ -23,7 +26,7 @@ export default function NavBar({currentLocale}: {currentLocale: string}) {
 
     // PAGE COMPONENT
     return (
-        <nav className="border-b-2 border-customTheme-lightLine bg-customTheme-lightBlock dark:bg-customTheme-darkBlock dark:border-customTheme-darkLine max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
+        <nav className="border-b-2 border-customTheme-lightLine bg-customTheme-lightBlock dark:bg-customTheme-darkBlock dark:border-customTheme-darkLine flex flex-wrap items-center justify-between mx-auto p-3">
             {/* Left */}
             <div className="flex items-center">
                 <NavBarLogo t={t}/>
@@ -32,6 +35,7 @@ export default function NavBar({currentLocale}: {currentLocale: string}) {
 
             {/* Right */}
             <div className="flex items-center gap-3">
+                <NavBarLocale currentLocale={currentLocale}/>
                 <NavBarTheme />
                 <NavBarSideBar />
             </div>

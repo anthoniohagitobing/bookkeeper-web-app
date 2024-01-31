@@ -30,7 +30,7 @@ export default function NavBarTheme() {
     
     // Once mounted, return theme button
     return (
-        <div className="relative hidden md:block">
+        <div className="relative hidden md:flex">
             {/* Button component */}
             <button onClick={() => setOpen(prevCheck => !prevCheck)} className="hover:bg-customGray-light rounded-full">
                 <span className="sr-only">Change light or dark mode</span>
@@ -59,13 +59,16 @@ export default function NavBarTheme() {
             <menu 
                 className={classNames(
                     open ? "absolute" : "hidden",
-                    "right-0 z-20 mt-2 font-normal bg-white origin-top-right rounded-lg shadow w-24 dark:divide-gray-600",
+                    "right-0 z-20 mt-10 font-normal bg-white origin-top-right rounded-lg shadow w-24 dark:divide-gray-600",
                 )}
             >
                 <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
                     <li>
                         <div
-                            onClick={() => setTheme('light')}
+                            onClick={() => {
+                                setTheme('light');
+                                setOpen(prevCheck => !prevCheck);
+                            }}
                             className={classNames(
                             resolvedTheme === 'light' ? 'text-customBlue-light font-bold' : 'text-black',
                             'px-4 py-2 text-base flex items-center gap-2 hover:cursor-pointer hover:bg-gray-100'
@@ -79,7 +82,10 @@ export default function NavBarTheme() {
                     </li>
                     <li>
                         <div
-                            onClick={() => setTheme('dark')}
+                            onClick={() => {
+                                setTheme('dark');
+                                setOpen(prevCheck => !prevCheck);
+                            }}
                             className={classNames(
                             resolvedTheme === 'dark' ? 'text-customBlue-light font-bold' : 'text-black',
                             'px-4 py-2 text-base flex items-center gap-2 hover:cursor-pointer hover:bg-gray-100'
