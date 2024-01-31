@@ -39,7 +39,7 @@ export default async function NavBar() {
                 <NavBarLocale currentLocale={currentLocale}/>
                 <NavBarTheme />
                 <NavBarAccount />
-                <NavBarSideBar />
+                <NavBarSideBar currentLocale={currentLocale}/>
             </div>
         </nav>
     )

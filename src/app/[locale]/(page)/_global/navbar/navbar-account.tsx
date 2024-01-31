@@ -4,7 +4,7 @@
 import { Link, usePathname, useRouter } from "@/navigation";
 import { useContext, useState } from "react";
 import { ContextVariables } from '@/lib/context-variables';
-import { classNames } from "@/lib/helper-function";
+import { classNames } from "@/app/[locale]/(page)/_global/helper-function/class-names";
 import secureLocalStorage from "react-secure-storage";
 import axiosInstance from "@/lib/axios-instance";
 import { AxiosResponse } from "axios";
@@ -49,7 +49,7 @@ export default function NavBarAccount() {
     // If use is not authenticated, return log-in, sign-up button
     if (!userAuthenticated) {
         return (
-            <div>
+            <div className="md: hidden">
                 <Link href="/user/log-in/" className="text-black hover:bg-customBlue-mid hover:text-white rounded-md px-2 py-2 text-base font-medium">
                     Log-in/Sign-up
                 </Link>
@@ -90,7 +90,7 @@ export default function NavBarAccount() {
                         <li
                             className='block px-4 py-3 border-b-2 border-customTheme-lightLine dark:border-customTheme-darkLine text-base'
                         >
-                            <div className="flex ">
+                            <div className="flex">
                                 <div className="flex-shrink-0">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 rounded-full dark:border-white fill-current" viewBox="0 0 16 16">
                                         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>

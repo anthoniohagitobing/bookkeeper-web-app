@@ -3,7 +3,7 @@
 // IMPORT MODULES
 import { usePathname, useRouter } from "@/navigation";
 import { useState } from 'react';
-import { classNames } from "@/lib/helper-function";
+import { classNames } from "@/app/[locale]/(page)/_global/helper-function/class-names";
 
 export default function NavBarLocale({currentLocale}: {currentLocale: string}) {
     // STATE AND THEME VARIABLES
@@ -13,15 +13,13 @@ export default function NavBarLocale({currentLocale}: {currentLocale: string}) {
     const router = useRouter();
     const pathname = usePathname();
 
-    // Available locale
+    // HELPER FUNCTION
+    // Change locale
     const availableLocale = [
-        { acronym: 'en', displayName: 'English-US'},
+        { acronym: 'en', displayName: 'English'},
         { acronym: 'id', displayName: 'Indonesia'},
         { acronym: 'jp', displayName: '日本語'}
     ]
-
-    // HELPER FUNCTION
-    // Change locale
     function changeLocale(locale: string) {
         router.replace(`${pathname}`, {locale: locale});
     }
