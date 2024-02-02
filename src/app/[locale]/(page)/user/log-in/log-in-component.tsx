@@ -1,12 +1,11 @@
 'use client';
 
-// MODULES IMPORT
+// IMPORT MODULES
 import React, { useState, useContext } from "react";
 import axios, { AxiosResponse } from "axios";
 import { useRouter, Link } from "@/navigation";
 import { toast } from 'react-toastify';
 import secureLocalStorage from "react-secure-storage";
-import { ContextVariables } from '@/lib/context-variables';
 
 // PAGE COMPONENT
 export default function LogInComponent(): JSX.Element {
@@ -42,12 +41,6 @@ export default function LogInComponent(): JSX.Element {
         setIsLoading(true);
         const res: AxiosResponse<any, any> = await axios.post(url, loginData);
         setIsLoading(false);
-
-        // Create user variable, this is temporarily disabled
-        // const user = {
-        //     "email": res.data.email,
-        //     "full_name": res.data.full_name
-        // }
 
         // Check response
         if (res.status === 200) {
