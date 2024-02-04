@@ -51,6 +51,9 @@ export default function NavBarSideBar({currentLocale}: {currentLocale: string}):
         const url: string = "user/logout/";
         const res: AxiosResponse<any, any> = await axiosInstance.post(url, {"refresh_token": refreshToken})
         if (res.status = 200) {
+            // Close modal
+            setOpen(prevCheck => !prevCheck)
+
             // Remove token from local storage
             secureLocalStorage.removeItem("access_token");
             secureLocalStorage.removeItem("refresh_token");
@@ -60,7 +63,7 @@ export default function NavBarSideBar({currentLocale}: {currentLocale: string}):
 
             // Display success messsage and push to log-in
             toast.success("Log-out successful");
-            router.push("/user/log-in/");
+            router.push("/");
         }
     }
 
