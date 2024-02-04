@@ -6,7 +6,7 @@ import axios, { AxiosResponse } from "axios";
 import { useRouter, Link } from "@/navigation";
 import { toast } from 'react-toastify';
 import secureLocalStorage from "react-secure-storage";
-import handleLogIn from "./handle-log-in";
+
 // PAGE COMPONENT
 export default function LogInComponent(): JSX.Element {
 
