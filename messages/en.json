@@ -15,5 +15,27 @@
     "NavigationProfile": "Profile",
     "test1": "test1",
     "test2": "test2"
+  },
+  "LogIn": {
+    "Title": "Log in to your account",
+    "SignUp1": "Don't have an account yet?",
+    "SignUp2": "Sign-up",
+    "Email1": "Email",
+    "Email2": "name@company.com",
+    "Password": "Password",
+    "LogIn": "Log-in",
+    "ForgotPassword": "Forgot Password?"
+  },
+  "SignUp": {
+    "Title": "Create a new Account",
+    "LogIn1": "Already have an account?",
+    "LogIn2": "Log-in",
+    "Email1": "Email",
+    "Email2": "name@company.com",
+    "FullName1": "Full Name",
+    "FullName2": "Your full name",
+    "Password": "Password",
+    "ConfirmPassword": "Confirm Password",
+    "SignUp": "Sign-Up"
   }
 }

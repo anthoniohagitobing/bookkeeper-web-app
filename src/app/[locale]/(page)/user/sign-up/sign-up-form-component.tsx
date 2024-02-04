@@ -5,8 +5,10 @@ import React, { useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import { useRouter, Link } from "@/navigation";
 import { toast } from 'react-toastify';
+import { Translation } from '@/lib/global-types';
 
-export default function SignUpFormComponent(): JSX.Element {
+// PAGE COMPONENT
+export default function SignUpFormComponent({t}: {t:Translation}): JSX.Element {
     // NAVIGATION SETUP
     const router = useRouter();
 
@@ -23,7 +25,6 @@ export default function SignUpFormComponent(): JSX.Element {
         const password: FormDataEntryValue | null = formData.get('password');
         const password2: FormDataEntryValue | null = formData.get('password2');
 
-        console.log({email});
         // Make call to api
         const url: string = `${process.env.NEXT_PUBLIC_DATABASE_URL}user/register/`;
         const res: AxiosResponse<any, any> = await axios.post(url, { email, full_name, password, password2 });
@@ -48,22 +49,22 @@ export default function SignUpFormComponent(): JSX.Element {
     return (
         <form className="space-y-4 md:space-y-6" onSubmit={handleSignUp}>
             <div>
-                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required/>
+                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{t["Email1"]}</label>
+                <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder={t["Email2"]} required/>
             </div>
             <div>
-                <label htmlFor="full_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Full Name</label>
-                <input type="text" name="full_name" id="full_name" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your full name" required/>
+                <label htmlFor="full_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{t["FullName1"]}</label>
+                <input type="text" name="full_name" id="full_name" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder={t["FullName2"]} required/>
             </div>
             <div>
-                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{t["Password"]}</label>
                 <input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required/>
             </div>
             <div>
-                <label htmlFor="password2" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm Password</label>
+                <label htmlFor="password2" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{t["ConfirmPassword"]}</label>
                 <input type="password" name="password2" id="password2" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required/>
             </div>
-            <button type="submit" className="w-full text-white bg-customBlue-mid hover:bg-customBlue-light focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-800">Sign up</button>
+            <button type="submit" className="w-full text-white bg-customBlue-mid hover:bg-customBlue-light focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-800">{t["SignUp"]}</button>
         </form>
     )
 }

@@ -12,8 +12,8 @@ export default function NavBarNavigation({t}:{t: Translation}): JSX.Element {
 
     // Navigation library
     const navigation = [
-        { name: t.NavigationDashboard, href: '/dashboard', current: true },
-        { name: t.NavigationProfile, href: '/profile', current: false },
+        { name: t["NavigationDashboard"], href: '/dashboard', current: true },
+        { name: t["NavigationProfile"], href: '/profile', current: false },
     ]
 
     // If user is not authenticated, return no navigation button

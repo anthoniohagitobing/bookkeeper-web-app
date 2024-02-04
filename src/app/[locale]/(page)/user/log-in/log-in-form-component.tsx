@@ -7,9 +7,10 @@ import { useRouter} from "@/navigation";
 import axios, { AxiosResponse } from "axios";
 import { toast } from 'react-toastify';
 import secureLocalStorage from "react-secure-storage";
+import { Translation } from '@/lib/global-types';
 
 // PAGE COMPONENT
-export default function LogInFormComponent(): JSX.Element {
+export default function LogInFormComponent({t}: {t:Translation}): JSX.Element {
     // NAVIGATION SETUP
     const router = useRouter();
 
@@ -46,11 +47,11 @@ export default function LogInFormComponent(): JSX.Element {
     return (
         <form className="space-y-4 md:space-y-6" onSubmit={handleLogIn}>
             <div>
-                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required/>
+                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{t["Email1"]}</label>
+                <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder={t["Email2"]} required/>
             </div>
             <div>
-                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{t["Password"]}</label>
                 <input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required/>
             </div>
             <div className="flex items-center justify-between">
@@ -62,9 +63,9 @@ export default function LogInFormComponent(): JSX.Element {
                         <label htmlFor="remember" className="text-gray-500 dark:text-gray-300">Remember me</label>
                     </div>
                 </div> */}
-                <Link href="/user/forgot-password" className="text-sm font-bold text-customBlue-light text-primary-600 hover:underline dark:text-primary-500">Forgot password?</Link>
+                <Link href="/user/forgot-password" className="text-sm font-bold text-customBlue-light text-primary-600 hover:underline dark:text-primary-500">{t["ForgotPassword"]}</Link>
             </div>
-            <button type="submit" className="w-full text-white bg-customBlue-mid hover:bg-customBlue-light focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-800">Sign in</button>
+            <button type="submit" className="w-full text-white bg-customBlue-mid hover:bg-customBlue-light focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-800">{t["LogIn"]}</button>
         </form>
     )
 }
