@@ -13,7 +13,7 @@ import axios, { AxiosResponse } from "axios";
 import { toast } from 'react-toastify';
 
 // SUB-COMPONENTS
-import ThemeSwitcher from "./theme-switcher";
+import ThemeSwitcher from "./backup-theme-switcher";
 
 // PAGE COMPONENT
 export default function NavBarOld({currentLocale}: {currentLocale: string}) {

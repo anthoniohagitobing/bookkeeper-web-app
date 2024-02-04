@@ -51,6 +51,9 @@ export default function NavBarSideBar({currentLocale}: {currentLocale: string}):
         const url: string = "user/logout/";
         const res: AxiosResponse<any, any> = await axiosInstance.post(url, {"refresh_token": refreshToken})
         if (res.status = 200) {
+            // Close modal
+            setOpen(prevCheck => !prevCheck)
+
             // Remove token from local storage
             secureLocalStorage.removeItem("access_token");
             secureLocalStorage.removeItem("refresh_token");
@@ -60,7 +63,7 @@ export default function NavBarSideBar({currentLocale}: {currentLocale: string}):
 
             // Display success messsage and push to log-in
             toast.success("Log-out successful");
-            router.push("/user/log-in/");
+            router.push("/");
         }
     }
 
@@ -165,7 +168,7 @@ export default function NavBarSideBar({currentLocale}: {currentLocale: string}):
                                 </>
                             ) : (
                                 <>
-                                    {/* Menu items if If user is not authenticated */}
+                                    {/* Menu items if user is not authenticated */}
                                     <li>
                                         <Link onClick={() => setOpen(prevCheck => !prevCheck)} href="/user/log-in" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                             <svg className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -184,19 +187,24 @@ export default function NavBarSideBar({currentLocale}: {currentLocale: string}):
 
                 {/* Section 2, bottom */}
                 <div className="flex flex-col gap-3">
-                    {/* User info */}
-                    <div className="flex border-b-2 pb-3">
-                        <div className="flex-shrink-0">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 rounded-full dark:border-white fill-current" viewBox="0 0 16 16">
-                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                                <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                            </svg>
+                    {/* User info, only show if authenticated */}
+                    {userAuthenticated ? (
+                        <div className="flex border-b-2 pb-3">
+                            <div className="flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 rounded-full dark:border-white fill-current" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                                    <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                                </svg>
+                            </div>
+                            <div className="ml-3">
+                                <div className="text-base font-medium leading-none text-black">{userFullName}</div>
+                                <div className="text-sm font-medium leading-none text-customGray-mid">{userEmail}</div>
+                            </div>
                         </div>
-                        <div className="ml-3">
-                            <div className="text-base font-medium leading-none text-black">{userFullName}</div>
-                            <div className="text-sm font-medium leading-none text-customGray-mid">{userEmail}</div>
-                        </div>
-                    </div>
+                    ) : (
+                        <></>
+                    )}
+
 
                     {/* Theme and language selection */}
                     <div className="flex gap-3">

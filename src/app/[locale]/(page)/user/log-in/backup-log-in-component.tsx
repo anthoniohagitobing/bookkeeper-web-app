@@ -1,15 +1,18 @@
-'use client';
+// 'use client';
 
-// MODULES IMPORT
+// IMPORT MODULES
 import React, { useState, useContext } from "react";
 import axios, { AxiosResponse } from "axios";
 import { useRouter, Link } from "@/navigation";
 import { toast } from 'react-toastify';
 import secureLocalStorage from "react-secure-storage";
-import { ContextVariables } from '@/lib/context-variables';
 
 // PAGE COMPONENT
 export default function LogInComponent(): JSX.Element {
+
+    // NAVIGATION SETUP
+    const router = useRouter();
+
     // STATE AND CONTEXT VARIABLES
     const [loginData, setLoginData] = useState({
         email: "",
@@ -18,8 +21,7 @@ export default function LogInComponent(): JSX.Element {
     const [error, setError] = useState<string>("");  
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    // NAVIGATION SETUP
-    const router = useRouter();
+
 
     // HELPER FUNCTION
     // Handle on change function for data change in form
@@ -42,12 +44,6 @@ export default function LogInComponent(): JSX.Element {
         setIsLoading(true);
         const res: AxiosResponse<any, any> = await axios.post(url, loginData);
         setIsLoading(false);
-
-        // Create user variable, this is temporarily disabled
-        // const user = {
-        //     "email": res.data.email,
-        //     "full_name": res.data.full_name
-        // }
 
         // Check response
         if (res.status === 200) {
@@ -74,7 +70,7 @@ export default function LogInComponent(): JSX.Element {
                     <label htmlFor="email">Email:</label>
                     <input 
                         name="email"
-                        id="email"
+                        // id="email"
                         type="email"
                         value={loginData.email}
                         onChange={handleOnChange}
@@ -85,7 +81,7 @@ export default function LogInComponent(): JSX.Element {
                     <label htmlFor="password">Password</label>
                     <input 
                         name="password"
-                        id="password"
+                        // id="password"
                         type="password"
                         value={loginData.password}
                         onChange={handleOnChange}
